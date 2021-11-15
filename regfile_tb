@@ -1,10 +1,10 @@
-module regfile_tb()
+module regfile_tb();
 
 reg write, clk, err;
 
 reg [2:0] writenum, readnum;
 
-reg DUT(clk, data_in, data_out, readnum, writenum, write)
+reg DUT(clk, data_in, data_out, readnum, writenum, write);
 
 initial begin
 //error is 0
@@ -14,8 +14,46 @@ clk = 1'bo;
 //Input 5 into register R0
 data_in = 16'b00000000000000110;
 writenum = 3'b000;
+clk = 1'b1;
+write = 1'b1;
+#5;
 readnum = 3'b000;
 
-clk = 1'b1;
+//If output is wrong, then err is 1
+if (data_out != 16'b00000000000000110)
+err = 1'b1;
 
-if 
+//Input 49 into register R4
+data_in = 16'b0000000000110001;
+writenum = 3'b100;
+clk = 1'b1;
+write = 1'b1;
+#5;
+readnum = 3'b100;
+
+//If output is wrong, then err is 1
+if (data_out != 16'bb0000000000110001)
+err = 1'b1;
+
+//Check if register still holds 5 in register 0
+readnum = 3'b000;
+//If output is wrong, then err is 1
+if (data_out != 16'b00000000000000110)
+err = 1'b1;
+
+//Overwrite R0 and input something else
+data_in = 16'b1110001010101010;
+writenum = 3'b000;
+clk = 1'b1;
+write = 1'b1;
+#5;
+readnum = 3'b00;
+
+//If output is wrong, then err is 1
+if (data_out != 16'b1110001010101010)
+err = 1'b1;
+
+end
+endmodule
+
+
