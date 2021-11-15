@@ -6,18 +6,22 @@ output [15:0] data_out;
 
 wire [15:0]  R0,R1,R2,R3,R4,R5,R6,R7;
   wire [7:0] en;
-  Dec #(3,8) U1(writenum,b)
+  wire [7:0] writenumoutput;
+  wire [7:0] readnumoutput;
   
+  Dec #(3,8) U1(writenum,writenumoutput)
+  Dec #(3,8) U2(readnum,readnumoutput)
   
-  vDFF #(16) R0 (clk en[0], datain, R0);
-  vDFF #(16) R1 (clk en[1], datain, R1);
-  vDFF #(16) R2 (clk en[2], datain, R2);
-  vDFF #(16) R3 (clk en[3], datain, R3);
-  vDFF #(16) R4 (clk en[4], datain, R4);
-  vDFF #(16) R5 (clk en[5], datain, R5);
-  vDFF #(16) R6 (clk en[6], datain, R6);
-  vDFF #(16) R7 (clk en[7], datain, R7);
+  vDFF #(16) RR0 (clk, en[0], datain, R0);
+  vDFF #(16) RR1 (clk, en[1], datain, R1);
+  vDFF #(16) RR2 (clk, en[2], datain, R2);
+  vDFF #(16) RR3 (clk, en[3], datain, R3);
+  vDFF #(16) RR4 (clk, en[4], datain, R4);
+  vDFF #(16) RR5 (clk, en[5], datain, R5);
+  vDFF #(16) RR6 (clk, en[6], datain, R6);
+  vDFF #(16) RR7 (clk, en[7], datain, R7);
   
+  Mux8 #(16) U3 (R7,R6,R5,R4,R3,R2,R1,R0,readnumoutput, data_out); 
   
 //Register Load
 module vDFFE(clk, en, in,out)
@@ -50,6 +54,7 @@ endmodule
     output [k-1:0] b;  // output
     wire [k-1:0] b = ({k{s[0]}} & a0) |({k{s[1]}} & a1) |({k{s[2]}} & a2) |({k{s[3]}} & a3) |
     ({k{s[4]}} & a4) |({k{s[5]}} & a5) |({k{s[6]}} & a6) |({k{s[7]}} & a7) ;
+    
   endmodule  
 
 
