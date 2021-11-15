@@ -1,0 +1,21 @@
+module regfile_tb()
+
+reg write, clk, err;
+
+reg [2:0] writenum, readnum;
+
+reg DUT(clk, data_in, data_out, readnum, writenum, write)
+
+initial begin
+//error is 0
+err = 1'b0;
+clk = 1'bo;
+
+//Input 5 into register R0
+data_in = 16'b00000000000000110;
+writenum = 3'b000;
+readnum = 3'b000;
+
+clk = 1'b1;
+
+if 
