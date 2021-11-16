@@ -3,10 +3,10 @@ module shifter(shift, in, out)
   input [1:0] shift;
   input [15:0] in;
   output [15:0] out;
-  
+  reg [15:0] out;
   
   //Shift the input either left or right by one, or keep it equal
-  always@(*)
+  always@(*)begin
     casex(shift)
       2'b00: out = in;
       2'b01: out = in<<1;
