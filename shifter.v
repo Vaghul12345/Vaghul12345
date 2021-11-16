@@ -1,19 +1,19 @@
-module shifter(shift, in, out)
+module shifter(shift, in, sout)
   
   input [1:0] shift;
   input [15:0] in;
-  output [15:0] out;
-  reg [15:0] out;
+  output [15:0] sout;
+  reg [15:0] sout;
   
   //Shift the input either left or right by one, or keep it equal
   always@(*)begin
     casex(shift)
-      2'b00: out = in;
-      2'b01: out = in<<1;
-      2'b10: out = in>>1;
-      2'b11: out = {in[15], in[15:1]);
+      2'b00: sout = in;
+      2'b01: sout = in<<1;
+      2'b10: sout = in>>1;
+      2'b11: sout = {in[15], in[15:1]);
            
-      default out = 16'bxxxxxxxxxxxxxxxx;
+      default sout = 16'bxxxxxxxxxxxxxxxx;
     endcase
   end
 endmodule
