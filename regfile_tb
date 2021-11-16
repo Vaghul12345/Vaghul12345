@@ -25,7 +25,7 @@ write = 1'b0;
 readnum = 3'b000;
 
 //If output is wrong, then err is 1
-if (data_out == 16'bb00000000000000110)
+if (data_out == 16'b00000000000000110)
 err = 1'b1;
 
 //Input 5 into register R0
