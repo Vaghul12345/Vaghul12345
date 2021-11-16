@@ -1,1 +1,42 @@
 module alutb();
+
+reg [15:0] Ain, Bin;
+reg [1:0] ALUop;
+wire [15:0] out;
+wire Z;
+
+ ALU DUT(Ain,Bin,ALUop,out,Z);
+initial begin
+
+err = 1'b0;
+
+Ain = 16'b0000000000000000;
+Bin = 16'b0000000000000000;
+
+ALUop = 2'b00;
+if(out != 16'b0000000000000000 | Z != 1'b1)
+err = 1;
+#5;
+
+Ain = 16'b0000000000000000;
+Bin = 16'b0000000000000000;
+ALUop = 2'b11;
+if(out != 16'b1111111111111111)
+err = 1;
+#5;
+
+
+Ain = 16'b0000000000110001;
+Bin = 16'b0000000000110011;
+ALUop = 2'b00;
+if(out!= 16'b0000000001100100)
+err = 1;
+#5;
+Ain = 16'b0000000000110001;
+Bin = 16'b0000000000110011;
+ALUop = 2'b00;
+ if(out!= 16'b0000000000110001)
+err = 1;
+
+end
+endmodule
