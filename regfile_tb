@@ -16,6 +16,17 @@ clk = 1'b0;
 
 
 
+//Input 5 into register R0, but write is empty
+data_in = 16'b00000000000000110;
+writenum = 3'b000;
+clk = 1'b1;
+write = 1'b0;
+#5;
+readnum = 3'b000;
+
+//If output is wrong, then err is 1
+if (data_out == 16'bb00000000000000110)
+err = 1'b1;
 
 //Input 5 into register R0
 data_in = 16'b00000000000000110;
