@@ -8,9 +8,39 @@ shifter DUT(shift, in, sout);
 initial begin
 err = 1'b0;
 
+//Testing with 0
+in = 16'b0000000000000000;
+shift = 2'b00;
+#5;
+if (sout != 16'b0000000000000000)
+err = 1;
+
+//Testing with 0
+in = 16'b0000000000000000;
+shift = 2'b01;
+#5;
+if (sout != 16'b0000000000000000)
+err = 1;
+
+//Testing with 0
+in = 16'b0000000000000000;
+shift = 2'b10;
+#5;
+if (sout != 16'b0000000000000000)
+err = 1;
+
+//Testing with 0
+in = 16'b0000000000000000;
+shift = 2'b11;
+#5;
+if (sout != 16'b0000000000000000)
+err = 1;
+
+
+
+
 in = 16'b1111000011001111;
 shift = 2'b00;
-
 #5;
 if(sout !=  16'b1111000011001111)
 err = 1'b1;
