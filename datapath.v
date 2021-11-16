@@ -27,7 +27,7 @@ module datapath(clk,readnum,vsel,loada,loadb,shift,asel,bsel,ALUop,loadc,loads,w
   shifter U1(B_out, shift, sout);
   
   //Declaring the ALU
-  ALU U2(Ain,Bin,ALUop, out,Z);
+  alu U2(Ain,Bin,ALUop, out,Z);
   
   //Declaring regFile
   regfile REGFILE (data_in,writenum,write,readnum,clk,data_out);
