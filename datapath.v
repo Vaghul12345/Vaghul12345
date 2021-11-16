@@ -7,27 +7,35 @@ module datapath(clk,readnum,vsel,loada,loadb,shift,asel,bsel,ALUop,loadc,loads,w
   output [15:0] datapath_out;
   output Z_out;
   
-  reg [15:0] data_in,data_out, A_out, B_Out, sout,Ain, Bin, out;
- 
+  reg [15:0] Ain, Bin;
   wire Z;
-  
+
+   wire [15:0] data_in,data_out,sout, A_out, B_out, datapath_out,out;
+   wire Z_out;
+
   //Declaring the D Flip Flops
   vDFFb #(16) A (clk, loada, data_out, A_out);
   vDFFb #(16) B (clk, loadb, data_out, B_out);
-  vDFFb #(16) C (clk, loadc, datapath_out);
-  vDFFc #(1) status (clk,loads, Z, Z_out);
+  vDFFb #(16) C (clk, loadc, out, datapath_out);
+  vDFFc status (clk,loads, Z, Z_out);
   
   
   //Declaring the Mux's
-  Mux2 #(16) in(datapath_in,datapath_out,vsel,data_in); 
-  Mux2 #(16) amux(A_out,16'b0000000000000000,asel,Ain); 
-  Mux2 #(16) bmux(B_out,{11'b00000000000,datapath_in[4:0]},bsel,Bin);
-  
+  //Mux2 #(16) in(datapath_in,datapath_out,vsel,data_in); 
+  //Mux2 #(16) amux(A_out,16'b0000000000000000,asel,Ain); 
+  //Mux2 #(16) bmux(B_out,{11'b00000000000,datapath_in[4:0]},bsel,Bin);
+   assign A_out = asel ? Ain : 0;
+   assign B_out = bsel ? Bin : {11'b0, datapath_in[4:0]};
+   assign data_in = vsel ? datapath_in : datapath_out;  
+
   //Declaring the Shifter
-  shifter U1(B_out, shift, sout);
+  shifter U1(
+	.in(B_out), 
+	.shift(shift), 
+	.sout(sout));
   
   //Declaring the ALU
-  alu U2(Ain,Bin,ALUop, out,Z);
+  ALU U2(Ain,Bin,ALUop, out,Z);
   
   //Declaring regFile
   regfile REGFILE (data_in,writenum,write,readnum,clk,data_out);
