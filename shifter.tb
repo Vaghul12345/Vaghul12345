@@ -1,9 +1,10 @@
-module shifttb();
+module shiftertb();
 reg [15:0] in;
 reg [1:0] shift;
 wire [15:0] sout;
 reg err;
 
+shifter DUT(shift, in, sout);
 initial begin
 err = 1'b0;
 
