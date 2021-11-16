@@ -1,4 +1,4 @@
-module alu_tb();
+module ALU_tb();
 
 reg [15:0] Ain, Bin;
 reg [1:0] ALUop;
