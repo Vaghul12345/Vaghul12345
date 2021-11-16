@@ -9,8 +9,8 @@ wire [15:0]  R0,R1,R2,R3,R4,R5,R6,R7;
   wire [7:0] writenumoutput;
   wire [7:0] readnumoutput;
   
-  Dec #(3,8) U1(writenum,writenumoutput)
-  Dec #(3,8) U2(readnum,readnumoutput)
+  Dec #(3,8) U1(writenum,writenumoutput);
+  Dec #(3,8) U2(readnum,readnumoutput);
   
   vDFF #(16) RR0 (clk, en[0], datain, R0);
   vDFF #(16) RR1 (clk, en[1], datain, R1);
