@@ -11,10 +11,10 @@ module alu(Ain,Bin,ALUop,out,Z);
   //Always block for each case of ALU operation
   always @(*) begin
     case (ALUop)
-      2'b00: out = Ain+Bin;
-      2'b01: out = Ain-Bin;
-      2'b10: out = Ain & Bin;
-      2'b11: out = ~Bin;
+      2'b00: out = Ain+Bin; //Add Ain and Bin
+      2'b01: out = Ain-Bin;  //Subtract Ain and Bin
+      2'b10: out = Ain & Bin; //Ain and Bin
+      2'b11: out = ~Bin; //Complement of Bin
       //default out = 16'bxxxxxxxxxxxxxxxx;
     endcase
   
