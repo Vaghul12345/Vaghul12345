@@ -5,7 +5,7 @@ module datapath(clk,readnum,vsel,loada,loadb,shift,asel,bsel,ALUop,loadc,loads,w
   input [2:0] readnum, writenum;
   input [1:0] ALUop,shift;
   output [15:0] datapath_out;
-  ouput Z_out;
+  output Z_out;
   
   reg [15:0] data_in,data_out, A_out, B_Out, sout,Ain, Bin, out;
  
@@ -66,8 +66,7 @@ module Mux2(a0,a1,s,b);
   input [k-1:0] a0,a1; // inputs
     input [7:0] s; // one-hot select
     output [k-1:0] b;  // output
-    wire [k-1:0] b = ({k{s[0]}} & a0) |({k{s[1]}} & a1) |({k{s[2]}} & a2);
+    wire [k-1:0] b = ({k{s[0]}} & a0) |({k{s[1]}} & a1);
     
   endmodule  
   
-endmodule
