@@ -11,33 +11,50 @@ initial begin
 
 err = 1'b0;
 
+//Check if Z works
 Ain = 16'b0000000000000000;
 Bin = 16'b0000000000000000;
-
 ALUop = 2'b00;
 if(out != 16'b0000000000000000 | Z != 1'b1)
 err = 1;
 #5;
 
-Ain = 16'b0000000000000000;
-Bin = 16'b0000000000000000;
-ALUop = 2'b11;
-if(out != 16'b1111111111111111)
-err = 1;
-#5;
 
 
+//Addition of numbers
 Ain = 16'b0000000000110001;
 Bin = 16'b0000000000110011;
 ALUop = 2'b00;
 if(out!= 16'b0000000001100100)
 err = 1;
 #5;
+
+//Normal Negative number subtraction
+Ain = 16'b0000000000110011;
+Bin = 16'b0000000000110001;
+ALUop = 2'b01;
+ if(out!= 16'b0000000000000010)
+err = 1;
+#5
+
+//Negative number Subtraction
 Ain = 16'b0000000000110001;
 Bin = 16'b0000000000110011;
-ALUop = 2'b00;
- if(out!= 16'b0000000000110001)
+ALUop = 2'b10;
+ if(out!= 16'b1111111111111110)
 err = 1;
+#5;
+
+
+//Complement of 0
+Ain = 16'b0000000000000000;
+Bin = 16'b0000000000000000;
+ALUop = 2'b11;
+if(out != 16'b1111111111111111)
+err = 1;
+
+
+
 
 $stop;
 
