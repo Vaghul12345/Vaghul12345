@@ -24,5 +24,11 @@ shift = 2'b10;
 #5;
 if(sout !=  16'b0111000011001111)
 err = 1'b1;
-
-shift
+in = 16'b1111000011001111;
+shift = 2'b11; 
+#5;
+if(sout != 16'b1111100001100111)
+err = 1'b1;
+$stop;
+end
+endmodule
