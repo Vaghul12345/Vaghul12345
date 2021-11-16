@@ -1,11 +1,12 @@
-module alutb();
+module alu_tb();
 
 reg [15:0] Ain, Bin;
 reg [1:0] ALUop;
 wire [15:0] out;
+reg err;
 wire Z;
 
- ALU DUT(Ain,Bin,ALUop,out,Z);
+ alu DUT(Ain,Bin,ALUop,out,Z);
 initial begin
 
 err = 1'b0;
@@ -38,5 +39,9 @@ ALUop = 2'b00;
  if(out!= 16'b0000000000110001)
 err = 1;
 
+$stop;
+
 end
+
+
 endmodule
